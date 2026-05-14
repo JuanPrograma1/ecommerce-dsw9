@@ -21,6 +21,10 @@ async function getPayPalAccessToken() {
     body: "grant_type=client_credentials",
   });
   const data = await res.json();
+  if (!res.ok) {
+    console.error('PayPal token error:', res.status, data);
+    throw new Error('No se pudo obtener el token de PayPal');
+  }
   return data.access_token;
 }
 
@@ -103,6 +107,10 @@ const checkoutController = {
         }),
       });
       const data = await response.json();
+      if (!response.ok) {
+        console.error('PayPal create order error:', response.status, data);
+        return res.status(500).json({ error: 'Error al crear orden PayPal' });
+      }
       res.json({ id: data.id }); // devuelve el ID de la orden PayPal al cliente
     } catch (err) {
       res.status(500).json({ error: "Error al crear orden PayPal" });
@@ -125,6 +133,10 @@ const checkoutController = {
         },
       );
       const data = await response.json();
+      if (!response.ok) {
+        console.error('PayPal capture error:', response.status, data);
+        return res.status(500).json({ error: 'Error al capturar el pago' });
+      }
       const captured = data.status === "COMPLETED";
 
       const order = await Order.findByPk(parseInt(orderId));
