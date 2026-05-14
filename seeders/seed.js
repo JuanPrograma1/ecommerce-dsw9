@@ -9,6 +9,7 @@ const products = [
   { name:'Auriculares Pro NC',   description:'Cancelacion de ruido, 30h bateria.',    price:199.99, stock:25, imageUrl:'/images/auriculares.jpg' },
   { name:'Smartwatch Series 5',  description:'GPS, frecuencia cardiaca, resistente.', price:249.99, stock:12, imageUrl:'/images/smartwatch.jpg' },
   { name:'Camara Mirrorless 4K', description:'Sensor APS-C, grabacion 4K.',           price:749.99, stock:5,  imageUrl:'/images/camera.jpg' },
+  { name:'Forro para iPhone',    description:'Proteccion elegante para iPhone, compatible con varios modelos.', price:29.99, stock:30, imageUrl:'/images/placeholder.jpg' },
 ];
 
 async function seed() {
